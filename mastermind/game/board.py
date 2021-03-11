@@ -5,36 +5,43 @@ class Board:
 
     def __init__(self):
 
-        self._piles = []
-        self._prepare()
+        self.keyword = create_keyword()
+        self.feedback = []
 
-    def apply(self, move):
+    def apply(self, guess):
+        for i in range(len(geuss)):
+            if str(guess)[i] == self.keyword[i]:
+                feedback.append("x")
+            elif str(guess)[i] in self.keyword:
+                feedback.append("o")
+            else:
+                feedback.append("*")
 
-        pile = move.get_pile()
-        stones = move.get_stones()
-        self._piles[pile] = max(0, self._piles[pile] - stones)
+    def is_solved(self, guess):
+        return (self.feedback == self.keyword)
         
 
-    def is_empty(self):
-        empty = [0] * len(self._piles)
-        return self._piles == empty
-        
-
-    def to_string(self):
+    def to_string(self, current_player):
         text =  "\n--------------------"
-        for pile, stones in enumerate(self._piles):
-            text += (f"\n{pile}: " + "O " * stones)
+        text += current_player + ": "
+        if len(self.feedback == 0:
+            text += "----"
+        else:
+            for symbol in self.feedback:
+                text += symbol
+
+        for symbol in self.display:
+            text += symbol
         text += "\n--------------------"
         return text
         
         
-
-    def _prepare(self):
+    @staticmethod
+    def create_keyword():
+        keyword = []
+        for i in range(4):
+            keyword.append(random.randint(0,9))
+        return keyword
         
-        piles = random.randint(2,5)
-        for n in range(piles):
-            rocks = random.randint(1,9)
-            self._piles.append(rocks)
-
-
-        
+    def clear_feedback(self):
+        self.feedback = []

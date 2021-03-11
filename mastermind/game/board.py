@@ -5,7 +5,10 @@ class Board:
 
     def __init__(self):
 
-        self.keyword = create_keyword()
+        self.keyword = []
+        for i in range(4):
+            self.keyword.append(random.randint(0,9))
+
         self.feedback = []
 
     def apply(self, guess):
@@ -35,13 +38,6 @@ class Board:
         text += "\n--------------------"
         return text
         
-        
-    @staticmethod
-    def create_keyword():
-        keyword = []
-        for i in range(4):
-            keyword.append(random.randint(0,9))
-        return keyword
-        
+            
     def clear_feedback(self):
         self.feedback = []

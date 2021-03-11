@@ -28,7 +28,6 @@ class Director:
         self._board = Board()
         self._console = Console()
         self._keep_playing = True
-        self._move = None
         self._roster = Roster()
         
     def start_game(self):
@@ -62,14 +61,13 @@ class Director:
             self (Director): An instance of Director.
         """
         # display the game board
-        board = self._board.to_string()
+        player = self._roster.get_current()
+        board = self._board.to_string(player)
         self._console.write(board)
         # get next player's move
-        player = self._roster.get_current()
         self._console.write(f"{player.get_name()}'s turn:")
-        pile = self._console.read_number("What pile to remove from? ")
-        stones = self._console.read_number("How many stones to remove? ")
-        move = Move(stones, pile)
+        guess = self._console.read_number("What is your guess? ")  ### next few lines change to get one guess and store same
+        move = Move(guess)
         player.set_move(move)
 
     def _do_updates(self):
@@ -81,7 +79,7 @@ class Director:
         """
         player = self._roster.get_current()
         move = player.get_move()
-        self._board.apply(move)
+        self._board.apply(move) ##### change board apply 
  
     def _do_outputs(self):
         """Outputs the important game information for each round of play. In 
@@ -90,9 +88,10 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        if self._board.is_empty():
+        if self._board.is_solved(): #### change board is solved
             winner = self._roster.get_current()
             name = winner.get_name()
             print(f"\n{name} won!")
             self._keep_playing = False
+        self.board.clear_display()
         self._roster.next_player()

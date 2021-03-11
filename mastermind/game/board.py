@@ -24,7 +24,7 @@ class Board:
     def to_string(self, current_player):
         text =  "\n--------------------"
         text += current_player + ": "
-        if len(self.feedback == 0:
+        if len(self.feedback == 0):
             text += "----"
         else:
             for symbol in self.feedback:

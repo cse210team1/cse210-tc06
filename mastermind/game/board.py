@@ -10,18 +10,23 @@ class Board:
             self.keyword.append(random.randint(0,9))
 
         self.feedback = []
+        self.finished_feedback = ["X","X","X","X"]
 
     def apply(self, guess):
+        self.feedback.clear()
         for i in range(len(str(guess))):
-            if str(guess)[i] == self.keyword[i]:
-                self.feedback.append("x")
-            elif str(guess)[i] in self.keyword:
-                self.feedback.append("o")
+            guess = str(guess)
+            # print(f"keyword list: {self.keyword} feedback: {self.feedback} guess: {guess}" )
+            # print(f"guess:{guess[i]} keyword: {self.keyword[i]}")
+            if int(guess[i]) == self.keyword[i]:
+                self.feedback.append("X")
+            elif int(guess[i]) in self.keyword:
+                self.feedback.append("O")
             else:
                 self.feedback.append("*")
 
     def is_solved(self):
-        return (self.feedback == self.keyword)
+        return (self.feedback == self.finished_feedback )
         
 
     def to_string(self, current_player):
@@ -38,4 +43,4 @@ class Board:
         
             
     def clear_feedback(self):
-        self.feedback = []
+        self.feedback.clear()

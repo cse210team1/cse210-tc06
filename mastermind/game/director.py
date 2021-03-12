@@ -92,5 +92,4 @@ class Director:
             name = winner.get_name()
             print(f"\n{name} won!")
             self._keep_playing = False
-        # self._board.clear_feedback()
         self._roster.next_player()

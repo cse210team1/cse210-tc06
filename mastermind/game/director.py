@@ -1,6 +1,5 @@
 from game.board import Board
 from game.console import Console
-from game.move import Move
 from game.player import Player
 from game.roster import Roster
 
@@ -29,6 +28,7 @@ class Director:
         self._console = Console()
         self._keep_playing = True
         self._roster = Roster()
+
         
     def start_game(self):
         """Starts the game loop to control the sequence of play.
@@ -62,13 +62,12 @@ class Director:
         """
         # display the game board
         player = self._roster.get_current()
-        board = self._board.to_string(player)
+        board = self._board.to_string(player.get_name())
         self._console.write(board)
         # get next player's move
         self._console.write(f"{player.get_name()}'s turn:")
         guess = self._console.read_number("What is your guess? ")  ### next few lines change to get one guess and store same
-        move = Move(guess)
-        player.set_move(move)
+        player.set_move(guess)
 
     def _do_updates(self):
         """Updates the important game information for each round of play. In 
@@ -93,5 +92,5 @@ class Director:
             name = winner.get_name()
             print(f"\n{name} won!")
             self._keep_playing = False
-        self.board.clear_display()
+        # self._board.clear_feedback()
         self._roster.next_player()

@@ -12,30 +12,28 @@ class Board:
         self.feedback = []
 
     def apply(self, guess):
-        for i in range(len(geuss)):
+        for i in range(len(str(guess))):
             if str(guess)[i] == self.keyword[i]:
-                feedback.append("x")
+                self.feedback.append("x")
             elif str(guess)[i] in self.keyword:
-                feedback.append("o")
+                self.feedback.append("o")
             else:
-                feedback.append("*")
+                self.feedback.append("*")
 
-    def is_solved(self, guess):
+    def is_solved(self):
         return (self.feedback == self.keyword)
         
 
     def to_string(self, current_player):
         text =  "\n--------------------"
-        text += current_player + ": "
-        if len(self.feedback == 0):
+        text += "\n" + str(current_player) + ": "
+        if len(self.feedback) == 0:
             text += "----"
         else:
             for symbol in self.feedback:
                 text += symbol
-
-        for symbol in self.display:
-            text += symbol
         text += "\n--------------------"
+        print(self.feedback)
         return text
         
             

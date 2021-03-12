@@ -38,7 +38,6 @@ class Board:
             for symbol in self.feedback:
                 text += symbol
         text += "\n--------------------"
-        print(self.feedback)
         return text
         
             
